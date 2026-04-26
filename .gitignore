@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# === Secrets / env / credential files (Day 0 hardening) ===
+.env
+.env.*
+!.env.example
+!.env*.example
+*.backup
+*credentials*.json
+*service*account*.json
+*.pem
+*.key
+mcp-backup/
