@@ -5,6 +5,7 @@ import { applicationSchema } from "@/lib/schema";
 import { sendApplicationMail } from "@/lib/mail";
 import { appendApplicationRow } from "@/lib/sheets";
 import { isSheetsConfigured } from "@/lib/env";
+import { rateLimit, getServerActionIp } from "@/lib/rate-limit";
 
 export type FormState = {
   ok: boolean | null;
@@ -22,6 +23,17 @@ export async function submitApplication(
   if (formData.get("website")) {
     // bot判定。静かに成功扱いでthanksへ
     redirect("/thanks");
+  }
+
+  // Rate limit: 3 submissions per minute per IP
+  const ip = await getServerActionIp();
+  const rl = rateLimit(`submit:${ip}`, 3, 60_000);
+  if (!rl.ok) {
+    const waitSec = Math.ceil((rl.resetAt - Date.now()) / 1000);
+    return {
+      ok: false,
+      message: `送信回数の上限に達しました。${waitSec}秒後に再度お試しください。`,
+    };
   }
 
   const raw = {
