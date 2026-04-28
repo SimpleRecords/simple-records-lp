@@ -35,7 +35,7 @@ export function Hero() {
                 "h-12 rounded-none px-10 text-base font-normal tracking-wide",
             })}
           >
-            掲載応募フォームへ
+            掲載に応募する
           </Link>
           <div className="flex items-center gap-4 text-sm text-neutral-500">
             <Link

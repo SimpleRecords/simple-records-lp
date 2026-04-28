@@ -17,13 +17,13 @@ const notoSansJp = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "Simple Records｜インディーズバンドの魅力を記事にする音楽メディア",
+  title: "Simple Records｜バンドの背景と音楽を、記事にして残す音楽メディア",
   description:
-    "Simple Recordsは、インディーズバンドの背景や音楽への想いを記事にして届ける音楽メディアです。リリース情報の掲載・バンド紹介記事（インタビュー）の応募を受け付けています。",
+    "Simple Recordsは、インディーズバンドの背景と、音楽との向き合い方を記事にして残す音楽メディアです。リリース情報の掲載・バンド紹介記事（インタビュー）の応募を受け付けています。",
   openGraph: {
     title: "Simple Records",
     description:
-      "シンプルで良い音楽を、もっと多くの人に。インディーズバンドの紹介・インタビュー記事を発信する音楽メディア。",
+      "ロックに救われた経験を、次の誰かへ。インディーズバンドの背景と音楽を記事にする音楽メディア。",
     type: "website",
     locale: "ja_JP",
     siteName: "Simple Records",

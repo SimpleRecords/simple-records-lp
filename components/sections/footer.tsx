@@ -10,7 +10,7 @@ export function Footer() {
             Simple Records
           </p>
           <p className="text-sm leading-relaxed text-neutral-400">
-            シンプルで良い音楽を、もっと多くの人に。
+            インディーズバンドの背景と音楽を、書いています。
           </p>
         </div>
         <nav className="flex flex-col gap-3 text-sm">

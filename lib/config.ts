@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "Simple Records",
-  tagline: "シンプルで良い音楽を、もっと多くの人に。",
+  tagline: "ロックに救われた経験を、次の誰かへ。",
   description:
-    "インディーズバンドの魅力を、記事にして届ける音楽メディアです。",
+    "バンドの背景と、音楽との向き合い方を、記事にして残します。",
   email: "simple.records.2022@gmail.com",
   links: {
     note: "https://note.com/simple_records",

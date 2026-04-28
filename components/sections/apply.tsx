@@ -14,7 +14,7 @@ export function Apply() {
           掲載応募フォーム
         </h2>
         <p className="mt-6 text-sm leading-relaxed text-neutral-600 sm:text-base">
-          必須項目のみで2〜3分で送信できます。内容を確認のうえ、3日以内にご連絡いたします。
+          必須項目のみで2〜3分。送信後、3日以内にご返信します。
         </p>
         <div className="mt-14">
           <ApplicationForm />
