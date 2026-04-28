@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Simple Records",
-  tagline: "ロックに救われた経験を、次の誰かへ。",
+  tagline: "音楽に救われた経験を、次の誰かへ。",
   description:
     "バンドの背景と、音楽との向き合い方を、記事にして残します。",
   email: "simple.records.2022@gmail.com",

@@ -31,7 +31,7 @@ export function Faq() {
           {faqs.map((faq) => (
             <div
               key={faq.q}
-              className="border-t border-neutral-300 pt-6 sm:grid sm:grid-cols-[auto_1fr] sm:gap-8"
+              className="border-t border-neutral-300 pt-6 sm:grid sm:grid-cols-[280px_1fr] sm:gap-8"
             >
               <dt className="text-base font-normal text-neutral-900 sm:text-lg">
                 {faq.q}

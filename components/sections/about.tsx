@@ -25,7 +25,7 @@ export function About() {
         </h2>
         <div className="mt-10 space-y-6 text-base leading-[2] text-neutral-700 sm:text-lg">
           <p>
-            ロックに救われた経験が、このメディアの起点にあります。
+            音楽に救われた経験が、このメディアの起点にあります。
             好きでいる理由にロジックはなく、シンプルに、好き。
             その純度のまま、インディーズバンドの背景と音楽を記事にしています。
           </p>

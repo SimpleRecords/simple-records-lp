@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Simple Records",
     description:
-      "ロックに救われた経験を、次の誰かへ。インディーズバンドの背景と音楽を記事にする音楽メディア。",
+      "音楽に救われた経験を、次の誰かへ。インディーズバンドの背景と音楽を記事にする音楽メディア。",
     type: "website",
     locale: "ja_JP",
     siteName: "Simple Records",
