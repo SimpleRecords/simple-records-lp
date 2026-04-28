@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og";
+import fs from "node:fs/promises";
+import path from "node:path";
 
 export const alt = "Simple Records — 音楽に救われた経験を、次の誰かへ。";
 export const size = { width: 1200, height: 630 };
@@ -23,6 +25,13 @@ async function loadGoogleFont(
   return await fetch(match[1]).then((r) => r.arrayBuffer());
 }
 
+async function loadLogoDataUrl(): Promise<string> {
+  const filePath = path.join(process.cwd(), "public/og-logo.png");
+  const buffer = await fs.readFile(filePath);
+  const base64 = buffer.toString("base64");
+  return `data:image/png;base64,${base64}`;
+}
+
 export default async function OpengraphImage() {
   const brand = "SIMPLE RECORDS";
   const taglineLine1 = "音楽に救われた経験を、";
@@ -31,9 +40,10 @@ export default async function OpengraphImage() {
     "インディーズバンドの背景と音楽を、記事にして残す音楽メディア。";
   const allText = brand + taglineLine1 + taglineLine2 + description;
 
-  const [notoLight, notoRegular] = await Promise.all([
+  const [notoLight, notoRegular, logoSrc] = await Promise.all([
     loadGoogleFont("Noto Sans JP", 300, allText),
     loadGoogleFont("Noto Sans JP", 400, allText),
+    loadLogoDataUrl(),
   ]);
 
   return new ImageResponse(
@@ -47,24 +57,21 @@ export default async function OpengraphImage() {
           alignItems: "center",
           justifyContent: "center",
           background: "#ffffff",
-          padding: "80px 100px",
+          padding: "60px 100px",
           fontFamily: "NotoSansJP",
         }}
       >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={logoSrc}
+          width={180}
+          height={180}
+          alt=""
+          style={{ marginBottom: 36 }}
+        />
         <div
           style={{
-            fontSize: 26,
-            color: "#999",
-            letterSpacing: "0.5em",
-            marginBottom: 64,
-            fontWeight: 400,
-          }}
-        >
-          {brand}
-        </div>
-        <div
-          style={{
-            fontSize: 76,
+            fontSize: 64,
             color: "#111",
             textAlign: "center",
             lineHeight: 1.4,
@@ -80,9 +87,9 @@ export default async function OpengraphImage() {
         </div>
         <div
           style={{
-            fontSize: 26,
+            fontSize: 24,
             color: "#666",
-            marginTop: 56,
+            marginTop: 40,
             textAlign: "center",
             fontWeight: 400,
           }}
