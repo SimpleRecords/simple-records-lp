@@ -17,6 +17,7 @@ const notoSansJp = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://simple-records-lp.vercel.app"),
   title: "Simple Records｜バンドの背景と音楽を、記事にして残す音楽メディア",
   description:
     "Simple Recordsは、インディーズバンドの背景と、音楽との向き合い方を記事にして残す音楽メディアです。リリース情報の掲載・バンド紹介記事（インタビュー）の応募を受け付けています。",
@@ -27,6 +28,12 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ja_JP",
     siteName: "Simple Records",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Simple Records",
+    description:
+      "音楽に救われた経験を、次の誰かへ。インディーズバンドの背景と音楽を記事にする音楽メディア。",
   },
 };
 
