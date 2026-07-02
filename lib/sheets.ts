@@ -39,7 +39,8 @@ export async function appendApplicationRow(input: ApplicationInput) {
   await sheets.spreadsheets.values.append({
     spreadsheetId: env.sheetId,
     range: `${tabName}!A:I`,
-    valueInputOption: "USER_ENTERED",
+    // RAW: フォーム入力を数式として評価させない（=IMPORTXML 等のインジェクション防止）
+    valueInputOption: "RAW",
     insertDataOption: "INSERT_ROWS",
     requestBody: {
       values: [row],
