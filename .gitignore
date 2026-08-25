@@ -51,3 +51,10 @@ next-env.d.ts
 *.pem
 *.key
 mcp-backup/
+
+# GCP サービスアカウント鍵（実秘密鍵）
+# ⚠️ このリポジトリは PUBLIC。ファイル名が service-account*.json パターンに
+#    合致しないため既存の除外を素通りしていた（2026-08-25 に発見・履歴には未混入）
+simple-records-lp.json
+*-*.iam.gserviceaccount.com.json
+**/*service_account*.json
