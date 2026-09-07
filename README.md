@@ -1,45 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# simple-records-lp
 
-## Getting Started
+Simple Records の掲載応募LP。バンドが「記事にしてほしい」と応募するための1枚ページ。
 
-First, run the development server:
+応募は Google スプレッドシートに1行追記され、同時に通知メールが飛ぶ。データベースは使っていない。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-## コマンド
+## 動かす
 
 ```bash
-npm run verify   # npx tsc --noEmit && npm run test:ci && npm run build
-npm run dev
-npm run test:ci
+npm install
+npm run dev      # http://localhost:3001 ← 3000 ではない
 ```
 
-提出前は `verify` を通す（型チェック + テスト + build を1本にしたもの・2026-09-07 に全リポで統一）。
+## 出す前に
+
+```bash
+npm run verify   # 型チェック + テスト + build
+```
+
+## 環境変数
+
+`lib/env.ts` が読む。欠けていると応募が例外で失敗する。
+
+| 変数 | 用途 |
+|---|---|
+| `RESEND_API_KEY` `MAIL_FROM` `MAIL_TO` | 応募通知メール |
+| `GOOGLE_SERVICE_ACCOUNT_B64` | Service Account JSON の Base64（推奨） |
+| `GOOGLE_SERVICE_ACCOUNT_JSON` | 上が無いときの代替（1行化した JSON） |
+| `GOOGLE_SHEET_ID` | 追記先スプレッドシート |
+| `GOOGLE_SHEET_TAB` | タブ名。省略時は先頭タブ |
+
+スプレッドシートの設定が無い場合はメール送信のみ行い、応募自体は成功する。
+
+## 注意
+
+**このリポジトリは PUBLIC。** 鍵・トークンをコードにも設定ファイルにも置かないこと。
+
+スプレッドシートへの書き込みは `valueInputOption: "RAW"`。
+`USER_ENTERED` に変えると応募内容が数式として評価される。
+
+設計の詳細と落とし穴は [CLAUDE.md](./CLAUDE.md)。
