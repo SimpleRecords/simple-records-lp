@@ -1,14 +1,14 @@
 # simple-records-lp
 
-Simple Records の掲載応募LP。バンドが「記事にしてほしい」と応募するための1枚ページ。
+Simple Records の応募ページ。掲載応募（`/`）とラジオ出演応募（`/radio`）。
 
-応募は Google スプレッドシートに1行追記され、同時に通知メールが飛ぶ。データベースは使っていない。
+応募は Supabase の `applications` 表に1行入り、同時に通知メールが飛ぶ。
 
 ## 動かす
 
 ```bash
 npm install
-npm run dev      # http://localhost:3001 ← 3000 ではない
+op run --env-file=.env.op -- npm run dev   # http://localhost:3001 ← 3000 ではない
 ```
 
 ## 出す前に
@@ -24,18 +24,15 @@ npm run verify   # 型チェック + テスト + build
 | 変数 | 用途 |
 |---|---|
 | `RESEND_API_KEY` `MAIL_FROM` `MAIL_TO` | 応募通知メール |
-| `GOOGLE_SERVICE_ACCOUNT_B64` | Service Account JSON の Base64（推奨） |
-| `GOOGLE_SERVICE_ACCOUNT_JSON` | 上が無いときの代替（1行化した JSON） |
-| `GOOGLE_SHEET_ID` | 追記先スプレッドシート |
-| `GOOGLE_SHEET_TAB` | タブ名。省略時は先頭タブ |
+| `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` | 応募の保存先（サーバー専用） |
+| `SUPABASE_ANON_KEY` | 管理ページのログイン |
 
-スプレッドシートの設定が無い場合はメール送信のみ行い、応募自体は成功する。
+DB に保存できなかった場合もメールが送れれば応募は受け付ける（件名に「[管理ページ未登録]」が付く）。
 
 ## 注意
 
 **このリポジトリは PUBLIC。** 鍵・トークンをコードにも設定ファイルにも置かないこと。
 
-スプレッドシートへの書き込みは `valueInputOption: "RAW"`。
-`USER_ENTERED` に変えると応募内容が数式として評価される。
+`applications` 表に anon の権限を付けないこと（書き込みはサーバーの service_role だけ）。
 
 設計の詳細と落とし穴は [CLAUDE.md](./CLAUDE.md)。

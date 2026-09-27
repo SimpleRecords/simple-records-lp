@@ -3,8 +3,8 @@
 import { redirect } from "next/navigation";
 import { applicationSchema } from "@/lib/schema";
 import { sendApplicationMail } from "@/lib/mail";
-import { appendApplicationRow } from "@/lib/sheets";
-import { isSheetsConfigured } from "@/lib/env";
+import { saveListingApplication } from "@/lib/db";
+import { notify } from "@/lib/notify";
 import { rateLimit, getServerActionIp } from "@/lib/rate-limit";
 
 export type FormState = {
@@ -59,17 +59,9 @@ export async function submitApplication(
   }
 
   try {
-    // メール送信は必須。Sheets は設定されていれば追記。
-    await sendApplicationMail(parsed.data);
-
-    if (isSheetsConfigured()) {
-      try {
-        await appendApplicationRow(parsed.data);
-      } catch (sheetErr) {
-        // Sheets失敗はユーザー通知せず、サーバーログに留める
-        console.error("[sheets append failed]", sheetErr);
-      }
-    }
+    // DB に保存 → 通知メール。DB に入らなかった応募は件名で分かるようにし、メールだけで受け付ける
+    const saved = await saveListingApplication(parsed.data);
+    await notify(() => sendApplicationMail(parsed.data, { saved }), saved);
   } catch (err) {
     console.error("[submit-application]", err);
     return {
