@@ -69,6 +69,20 @@ DB に入らなかったときは件名の頭に「[管理ページ未登録]」
 
 ---
 
+## 応募台帳を手元から読み書きする
+
+管理ページ（/admin）と同じ `applications` 表を、AI のセッションや手元から触るためのコマンド。service_role キーを使うので手元だけで動かす。
+
+```bash
+npm run -s apps -- list                      # 進行中（--stage all / published など、--kind radio）
+npm run -s apps -- show <id|バンド名>
+npm run -s apps -- add --band <名前> --purpose <種別> --stage replied --next "<次アクション>"
+npm run -s apps -- update <id|バンド名> --stage drafting --next "<次アクション>" --memo-append "<追記>"
+```
+
+別のフォルダからは `npm run -s apps --prefix ~/ai-projects/projects/simple-records-lp -- list`。
+同じバンド名が複数あるときは、進行中が1件ならそれを選び、それ以外は id を求めて止まる。
+
 ## 環境変数
 
 `lib/env.ts` が読む。**欠けていると例外を投げて応募が失敗する**（黙って落ちない設計）。
@@ -98,8 +112,9 @@ DB が未設定・停止中でも、メールが送れれば応募は受け付�
 
 ## 現在地（2026-09-27 時点）
 
-- PR #2（`feat/radio-campaign`）：応募の保存先を Supabase に切り替え、`/radio`（12/23放送のゲスト募集）と `/admin`（応募管理）を追加。プレビューのビルドは成功。**マージはオーナー**
-- マージ後にやること：本番でメールのリンクからログインできるか確認 → 応募ボード（`simple-records/knowledge/applications/_index.md`）の案件を `applications` に移行（`source='import'`）→ テスト応募1件を削除
+- 応募の保存先は Supabase。`/radio`（12/23放送のゲスト募集）と `/admin`（応募管理）がある
+- 2026-09-27 PR #2 マージ・本番反映。応募ボードの20件を `applications` に移行済み（`source='import'`）、テスト応募は削除済み。以後の台帳の正本はこの表（AI は `npm run apps`）
+- ⏳ 本番でメールのリンクからログインできるかの確認（オーナー）
 - `/radio` は `lib/radio.ts` の【要確認】7項目が埋まるまで本番では404（局への確認待ち）
 - Next.js（`app/` ルーター）+ Tailwind + shadcn/base-ui。Sentry 導入済み（`instrumentation*.ts`）
 - セキュリティ対応は Phase 1 が main に入っている（鍵の除外・レート制限。数式インジェクション対策はスプレッドシート廃止で不要になった）

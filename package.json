@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "test": "vitest",
-    "test:ci": "vitest run"
+    "test:ci": "vitest run",
+    "apps": "op run --env-file=.env.op -- node scripts/applications.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
