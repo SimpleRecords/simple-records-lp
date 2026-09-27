@@ -31,7 +31,7 @@ export function RadioApplicationForm() {
         <Input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <Field id="bandName" label="バンド名・アーティスト名" required error={errors.bandName?.[0]}>
+      <Field id="bandName" label="バンド名" required error={errors.bandName?.[0]}>
         <Input
           id="bandName"
           name="bandName"
@@ -113,6 +113,7 @@ export function RadioApplicationForm() {
         id="savedMoment"
         label="あなたが音楽に救われた瞬間を教えてください"
         required
+        description="100〜200字程度で大丈夫です。"
         error={errors.savedMoment?.[0]}
       >
         <Textarea
@@ -129,7 +130,7 @@ export function RadioApplicationForm() {
         id="whoToSave"
         label="あなたの音楽は、誰を救えると思いますか"
         required
-        description="救われたと言われた経験や、ファンからの言葉があれば教えてください。"
+        description="救われたと言われた経験や、ファンからの言葉があれば教えてください。なければ、届けたい相手を思い浮かべて書いてください。100〜200字程度で構いません。"
         error={errors.whoToSave?.[0]}
       >
         <Textarea
@@ -146,7 +147,7 @@ export function RadioApplicationForm() {
         id="members"
         label="出演できる人数"
         required
-        description="当日スタジオに来られる方の人数"
+        description="当日スタジオに来られる方の人数（1名から）"
         error={errors.members?.[0]}
       >
         <Input
@@ -165,7 +166,7 @@ export function RadioApplicationForm() {
         defaultChecked={values.canAttend === "on"}
         error={errors.canAttend?.[0]}
       >
-        {radioCampaign.airDateShort}の放送時間に、スタジオへ来られます
+        {radioCampaign.airDateShort}の放送時間に、メンバーのうち1名以上がスタジオへ来られます
       </Check>
 
       <Field id="message" label="その他、伝えておきたいこと">
@@ -217,9 +218,6 @@ export function RadioApplicationForm() {
         >
           {pending ? "送信中…" : "応募する"}
         </Button>
-        <p className="mt-4 text-xs text-neutral-500">
-          締切：{radioCampaign.deadline}
-        </p>
       </div>
     </form>
   );

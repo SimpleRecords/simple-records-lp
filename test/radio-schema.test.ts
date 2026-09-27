@@ -57,7 +57,7 @@ describe("radioCampaign", () => {
     .filter(([, v]) => v.includes(RADIO_PLACEHOLDER))
     .map(([k]) => k);
 
-  // 公開前に局へ確認して埋める値。埋まったら todo が消える
+  // 公開前にオーナーが決めて埋める値。埋まったら todo が消える
   for (const key of unresolved) {
     it.todo(`fill ${key} before publishing`);
   }

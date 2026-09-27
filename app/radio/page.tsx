@@ -33,7 +33,8 @@ const overview: [string, string][] = [
   ["出演場所", r.studio],
   ["集合時刻", r.meetingTime],
   ["出演内容", `パーソナリティとのトーク（${r.talkLength}）と、あなたの曲の音源を1曲放送`],
-  ["募集数", `1〜2組（1組あたりの出演人数は${r.maxMembers}名まで）`],
+  ["放送用の音源", r.audioFormat],
+  ["募集数", `1〜2組（1組あたり1名から${r.maxMembers}名まで出演できます）`],
   ["出演料・参加費", r.fee],
   ["交通費", r.travelCost],
   ["放送回の公開", "放送した回は、後日 YouTube・note などで公開します"],
@@ -42,8 +43,16 @@ const overview: [string, string][] = [
 ];
 
 const conditions = [
-  `${r.airDateShort}の放送時間に、上記のスタジオへ来られる方`,
+  "バンドとして活動している方（編成・人数は問いません）",
+  "現在、メジャーレーベルと契約していない方",
+  `${r.airDateShort}の放送時間に、メンバーのうち1名以上が上記のスタジオへ来られる方`,
   "オリジナル曲の音源がある方",
+];
+
+const benefits: [string, string][] = [
+  ["オリジナル曲を1曲、FMで", "江東区のコミュニティFM、レインボータウンFM（FM88.5）で、あなたの曲を1曲放送します。"],
+  ["曲だけでなく、話す時間がある", "パーソナリティとのトークで、曲の背景やバンドのことを自分たちの言葉で話せます。"],
+  ["放送回のURLが残る", "放送した回は、後日 YouTube・note で公開します。公開された回のURLは、バンドの告知で共有できます。"],
 ];
 
 export default function RadioPage() {
@@ -74,11 +83,12 @@ export default function RadioPage() {
               あなたのバンドを。
             </h1>
             <div className="flex flex-col gap-2 text-neutral-700">
-              <p className="text-sm tracking-wide text-neutral-500">{r.frame}</p>
+              <p className="text-sm tracking-wide text-neutral-500">{r.station}</p>
               <p className="text-lg sm:text-xl">{r.programName}</p>
               <p className="text-sm text-neutral-500">
                 {r.airDateShort} 14:00〜15:00・生放送
               </p>
+              <p className="text-sm text-neutral-500">メンバー1人からでも出演できます</p>
             </div>
             <Link
               href="#apply"
@@ -136,6 +146,26 @@ export default function RadioPage() {
           </div>
         </section>
 
+        {/* Benefits */}
+        <section className="border-t border-neutral-200 px-6 py-24 sm:py-32">
+          <div className="mx-auto max-w-3xl">
+            <p className="font-display text-sm uppercase tracking-[0.3em] text-neutral-500">
+              Benefits
+            </p>
+            <h2 className="mt-4 text-2xl font-light leading-relaxed sm:text-3xl">
+              出演すると
+            </h2>
+            <div className="mt-12 grid gap-6 sm:grid-cols-2">
+              {benefits.map(([title, body]) => (
+                <div key={title} className="border border-neutral-200 p-8">
+                  <p className="text-lg leading-relaxed text-neutral-900">{title}</p>
+                  <p className="mt-3 text-sm leading-[1.9] text-neutral-600">{body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Overview */}
         <section className="border-t border-neutral-200 px-6 py-24 sm:py-32">
           <div className="mx-auto max-w-3xl">
@@ -181,20 +211,19 @@ export default function RadioPage() {
 
             <h3 className="mt-16 text-lg font-normal">選考</h3>
             <p className="mt-6 text-base leading-[2] text-neutral-700">
-              Simple Records が行います。
+              Simple Records が行います。2つの質問への回答を読んで選びます。
             </p>
 
             <h3 className="mt-16 text-lg font-normal">出演にならなかった応募について</h3>
             <p className="mt-6 text-base leading-[2] text-neutral-700">
-              いただいた回答は、Simple Records がすべて読みます。
-              記事で紹介するバンドを探すときの候補にさせてください。
+              回答は、Simple Records が記事で紹介するバンドを探すときの候補にさせてください。
               取材をお願いするときは、こちらからご連絡します。
             </p>
 
             <h3 className="mt-16 text-lg font-normal">初回は{r.firstBroadcast}</h3>
             <p className="mt-6 text-base leading-[2] text-neutral-700">
               初回は、パーソナリティのバンド Elizabeth.eight の回です。
-              番組の雰囲気を知りたい方は、聴いてから応募してください。
+              番組の雰囲気を知りたい方は、聴いてみてください。インターネットでは「リスラジ」（アプリ・Web）で聴けます。
             </p>
           </div>
         </section>

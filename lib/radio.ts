@@ -2,7 +2,7 @@
  * ラジオ出演バンド募集（2026-12-23 放送回）の募集内容。
  * ページ本文・フォーム・通知メールはすべてここを参照する。
  *
- * 【要確認】の値は、公開前に局へ確認して埋める。
+ * 【要確認】の値は、公開前にオーナーが決めて埋める。
  * test/radio-schema.test.ts の `it.todo` が残っている間は未確定の値がある。
  */
 export const radioCampaign = {
@@ -22,6 +22,7 @@ export const radioCampaign = {
   studio: "東京都江東区のスタジオ（【要確認：スタジオ名・住所】）",
   meetingTime: "【要確認】",
   talkLength: "【要確認：分数】",
+  audioFormat: "【要確認：放送用音源の形式と提出方法】",
   maxMembers: "【要確認】",
   fee: "【要確認】",
   travelCost: "【要確認】",

@@ -71,7 +71,7 @@ export async function sendRadioApplicationMail(
   const subject = `${saved ? "" : UNSAVED}【ラジオ出演応募】${input.bandName}｜${radioCampaign.airDateShort}`;
 
   const text = [
-    `■ バンド名・アーティスト名`,
+    `■ バンド名`,
     input.bandName,
     ``,
     `■ ご担当者`,

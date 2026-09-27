@@ -25,7 +25,7 @@ export function Footer() {
           href="/#apply"
           className="text-neutral-300 underline-offset-4 hover:text-white hover:underline"
         >
-          掲載応募フォーム
+          記事掲載の応募フォーム
         </Link>
       </nav>
       <p className="mt-8 text-center text-xs text-neutral-500">
