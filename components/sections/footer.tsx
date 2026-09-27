@@ -22,7 +22,7 @@ export function Footer() {
           X
         </Link>
         <Link
-          href="#apply"
+          href="/#apply"
           className="text-neutral-300 underline-offset-4 hover:text-white hover:underline"
         >
           掲載応募フォーム

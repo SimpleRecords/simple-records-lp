@@ -4,7 +4,7 @@
 
 Simple Records（音楽メディア・個人事業）の**掲載応募LP**。バンドが「記事にしてほしい」と応募するための1枚ページ。
 
-応募が送られると、Google スプレッドシートに1行追記され、同時にメールが飛ぶ。DB は無い。
+応募が送られると、Supabase の `applications` 表に1行入り、同時にメールが飛ぶ。掲載応募（`/`）とラジオ出演応募（`/radio`）を同じ表に `kind` で分けて持つ。
 
 ---
 
@@ -13,7 +13,7 @@ Simple Records（音楽メディア・個人事業）の**掲載応募LP**。バ
 - GitHubリポジトリ: `SimpleRecords/simple-records-lp` … **PUBLIC**
 - Googleアカウント: simple.records.2022@gmail.com
 - Vercelアカウント: simple.records.2022@gmail.com
-- Supabase: 不要（応募先はスプレッドシート）
+- Supabase: simple.records.2022@gmail.com／プロジェクト `bpmknpjmvftfbxstwdfw`（Tokyo）。キーは 1Password「Simple Records」保管庫の `project_url` `anon_key` `service_role_key`
 - 区分: Simple Records（個人事業）
 
 ⚠️ **PUBLIC リポジトリ。** GCP サービスアカウント鍵は 27d9cbf で `.gitignore` に入れた。
@@ -25,7 +25,7 @@ Simple Records（音楽メディア・個人事業）の**掲載応募LP**。バ
 
 ```bash
 npm run verify   # npx tsc --noEmit && npm run test:ci && npm run build（提出前はこれ）
-npm run dev      # next dev -p 3001 ← 3000 ではない
+op run --env-file=.env.op -- npm run dev   # next dev -p 3001 ← 3000 ではない。Supabase のキーを 1Password から展開する
 npm run test:ci  # vitest（1回実行）
 ```
 
@@ -47,7 +47,15 @@ components/
   sections/                    hero / about / flow / apply / faq / footer
 lib/
   schema.ts                    zod。応募の項目と検証
-  sheets.ts                    Google Sheets への追記
+  db.ts                        Supabase への保存（service_role・サーバー専用）
+  notify.ts                    通知メールの失敗の扱い（DB保存済みなら応募者に見せない）
+  radio.ts / radio-schema.ts   ラジオ出演募集の募集内容と入力検証
+supabase/migrations/           表の定義。適用は Supabase の SQL Editor に貼って実行
+app/admin/                     応募の管理ページ（一覧・詳細・段階/選考/メモの更新）
+  login/ auth/callback/        メールのリンクでログイン（新規ユーザーは作らない）
+proxy.ts                       /admin 配下：未ログインはログイン画面へ
+lib/supabase/server.ts         ログインした人の権限（RLS）で読み書きするクライアント
+lib/admin.ts                   段階・種別・選考の表示名
   mail.ts                      Resend でのメール送信
   rate-limit.ts                送信回数の制限
   env.ts                       環境変数の読み出し（欠けたら例外）
@@ -56,7 +64,8 @@ test/                          schema と rate-limit の単体テスト
 ```
 
 **応募1件が通る道**：フォーム → `submitApplication`（Server Action）→ ①honeypot 判定 →
-②レート制限 → ③zod 検証 → ④スプレッドシート追記 → ⑤メール送信 → `/thanks` へ。
+②レート制限 → ③zod 検証 → ④DB保存 → ⑤メール送信 → `/thanks` へ。
+DB に入らなかったときは件名の頭に「[管理ページ未登録]」を付けてメールだけで受け付ける。
 
 ---
 
@@ -67,21 +76,18 @@ test/                          schema と rate-limit の単体テスト
 | 変数 | 用途 |
 |---|---|
 | `RESEND_API_KEY` `MAIL_FROM` `MAIL_TO` | 応募通知メール |
-| `GOOGLE_SERVICE_ACCOUNT_B64` | Service Account の JSON を Base64 にしたもの（**推奨**） |
-| `GOOGLE_SERVICE_ACCOUNT_JSON` | 上が無いときの代替。1行化した JSON |
-| `GOOGLE_SHEET_ID` | 追記先のスプレッドシート |
-| `GOOGLE_SHEET_TAB` | タブ名。省略可（省略時は先頭タブを解決） |
+| `SUPABASE_URL` `SUPABASE_SERVICE_ROLE_KEY` | 応募の保存（サーバー専用） |
+| `SUPABASE_ANON_KEY` | 管理ページのログイン（`SUPABASE_URL` と組み合わせる） |
 
-スプレッドシートの設定が無いときは `isSheetsConfigured()` が false を返し、
-**メールだけ飛んで応募自体は成功する**（応募を落とさないための設計）。
+DB が未設定・停止中でも、メールが送れれば応募は受け付ける（応募を落とさないための設計）。
 
 ---
 
 ## 落とし穴
 
-- ⚠️ **スプレッドシートへの書き込みは `valueInputOption: "RAW"` を変えないこと。**
-  `USER_ENTERED` に戻すと、応募者が `=IMPORTXML(...)` と入力したときに
-  スプレッドシート側で数式として評価される（f26f0b7 で塞いだ）。
+- ⚠️ **`applications` に anon の権限を付けないこと。**書き込みはサーバーの service_role だけ、
+  閲覧・更新は `admin_users` に載ったログインユーザーだけ（RLS）。
+- ⚠️ Supabase の無料プランは、しばらくアクセスが無いとプロジェクトが一時停止する。停止中の応募は「[管理ページ未登録]」メールで届く。
 - ⚠️ **レート制限はプロセス内のメモリで持っている**（3回/分/IP）。
   Vercel が複数インスタンスに分かれると、インスタンスごとに別カウントになる。
   厳密にするなら Upstash などの外部ストアに置き換える（`lib/rate-limit.ts` 冒頭に同じ注記）。
