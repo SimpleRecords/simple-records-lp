@@ -32,7 +32,7 @@ export const DETAIL_LABELS: Record<string, string> = {
   songUrl: "番組でかけたい曲",
   savedMoment: "音楽に救われた瞬間",
   whoToSave: "あなたの音楽は、誰を救えるか",
-  members: "出演できる人数",
+  members: "出演したい人数",
   consentArticle: "記事の参考にすることへの同意",
   message: "その他",
 };

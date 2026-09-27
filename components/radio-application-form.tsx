@@ -145,9 +145,9 @@ export function RadioApplicationForm() {
 
       <Field
         id="members"
-        label="出演できる人数"
+        label="出演したい人数"
         required
-        description="当日スタジオに来られる方の人数（1名から）"
+        description="当日スタジオに来たい方の人数（1名から）。ご希望をもとに調整します。"
         error={errors.members?.[0]}
       >
         <Input
