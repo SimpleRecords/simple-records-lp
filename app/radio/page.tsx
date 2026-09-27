@@ -32,14 +32,14 @@ const overview: [string, string][] = [
   ["放送局", `${r.station}。${r.listenOnline}`],
   ["出演場所", r.studio],
   ["集合時刻", r.meetingTime],
-  ["出演内容", `パーソナリティとのトーク（${r.talkLength}）と、あなたの曲の音源を1曲放送`],
+  ["出演内容", "パーソナリティとのトークと、あなたの曲の音源を1曲放送"],
   ["放送用の音源", r.audioFormat],
-  ["募集数", `1〜2組（1組あたり1名から${r.maxMembers}名まで出演できます）`],
+  ["募集数", "1〜2組（1組あたり1名から出演できます。出演したい人数はフォームで教えてください）"],
   ["出演料・参加費", r.fee],
   ["交通費", r.travelCost],
   ["放送回の公開", "放送した回は、後日 YouTube・note などで公開します"],
   ["応募締切", r.deadline],
-  ["結果のご連絡", `${r.resultDate}までに${r.resultNotice}へご連絡します`],
+  ["結果のご連絡", r.resultNotice],
 ];
 
 const conditions = [

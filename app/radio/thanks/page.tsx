@@ -24,7 +24,7 @@ export default function RadioThanksPage() {
         </h1>
         <div className="space-y-4 text-sm leading-[2] text-neutral-600 sm:text-base">
           <p>
-            {r.resultDate}までに、{r.resultNotice}へご連絡します。
+            {r.resultNotice}。
           </p>
           <p>
             初回放送は{r.firstBroadcast}。{r.listenOnline}。

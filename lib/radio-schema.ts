@@ -49,8 +49,8 @@ export const radioApplicationSchema = z.object({
   members: z
     .string()
     .trim()
-    .min(1, "出演できる人数を入力してください")
-    .max(50, "出演できる人数が長すぎます"),
+    .min(1, "出演したい人数を入力してください")
+    .max(50, "出演したい人数が長すぎます"),
   canAttend: checked("当日スタジオに来られることをご確認ください"),
   consentArchive: checked("放送回の公開への同意が必要です"),
   consentArticle: z.enum(["on", ""]).optional().default(""),

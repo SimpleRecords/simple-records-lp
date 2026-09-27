@@ -95,7 +95,7 @@ export async function sendRadioApplicationMail(
     `■ あなたの音楽は、誰を救えるか`,
     input.whoToSave,
     ``,
-    `■ 出演できる人数`,
+    `■ 出演したい人数`,
     input.members,
     ``,
     `■ 記事の参考にすることへの同意`,

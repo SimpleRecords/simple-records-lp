@@ -19,14 +19,12 @@ export const radioCampaign = {
   resultDate: "11月22日（日）",
   firstBroadcast: "10月28日（水）14時",
 
-  studio: "東京都江東区のスタジオ（【要確認：スタジオ名・住所】）",
-  meetingTime: "【要確認】",
-  talkLength: "【要確認：分数】",
-  audioFormat: "【要確認：放送用音源の形式と提出方法】",
-  maxMembers: "【要確認】",
-  fee: "【要確認】",
-  travelCost: "【要確認】",
-  resultNotice: "【要確認：出演をお願いする方のみ／応募者全員】",
+  studio: "東京都江東区のスタジオ（場所は、出演が決まった方にお知らせします）",
+  meetingTime: "出演が決まった方に、別途お知らせします",
+  audioFormat: "形式と提出方法は、出演が決まった方にお知らせします",
+  fee: "どちらもありません",
+  travelCost: "各自でご負担ください（お支払いはありません）",
+  resultNotice: "出演をお願いする方には、11月22日（日）までにメールでご連絡します",
 } as const;
 
 export const RADIO_PLACEHOLDER = "【要確認";
