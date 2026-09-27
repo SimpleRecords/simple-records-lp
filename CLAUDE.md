@@ -102,6 +102,7 @@ DB が未設定・停止中でも、メールが送れれば応募は受け付�
 - マージ後にやること：本番でメールのリンクからログインできるか確認 → 応募ボード（`simple-records/knowledge/applications/_index.md`）の案件を `applications` に移行（`source='import'`）→ テスト応募1件を削除
 - `/radio` は `lib/radio.ts` の【要確認】7項目が埋まるまで本番では404（局への確認待ち）
 - Next.js（`app/` ルーター）+ Tailwind + shadcn/base-ui。Sentry 導入済み（`instrumentation*.ts`）
+- セキュリティ対応は Phase 1 が main に入っている（鍵の除外・レート制限。数式インジェクション対策はスプレッドシート廃止で不要になった）
 - テストは `schema` `rate-limit` `radio-schema` `notify` の4本
 - **`node_modules` が無い状態で置かれていることがある。** その場合 `npm install` から
 - ビルドが `next/font/google queries have exactly one entry` で落ちることがある（Google Fonts の取得失敗）。もう一度流すと通る
