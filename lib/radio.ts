@@ -24,7 +24,7 @@ export const radioCampaign = {
   audioFormat: "形式と提出方法は、出演が決まった方にお知らせします",
   fee: "どちらもありません",
   travelCost: "各自でご負担ください（お支払いはありません）",
-  resultNotice: "11月22日（日）までに、応募いただいた全員にメールでご連絡します",
+  resultNotice: "出演をお願いする方には、11月22日（日）までにメールでご連絡します",
 } as const;
 
 export const RADIO_PLACEHOLDER = "【要確認";
