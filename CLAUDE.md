@@ -96,9 +96,12 @@ DB が未設定・停止中でも、メールが送れれば応募は受け付�
 
 ---
 
-## 現在地（2026-09-07 時点）
+## 現在地（2026-09-27 時点）
 
+- PR #2（`feat/radio-campaign`）：応募の保存先を Supabase に切り替え、`/radio`（12/23放送のゲスト募集）と `/admin`（応募管理）を追加。プレビューのビルドは成功。**マージはオーナー**
+- マージ後にやること：本番でメールのリンクからログインできるか確認 → 応募ボード（`simple-records/knowledge/applications/_index.md`）の案件を `applications` に移行（`source='import'`）→ テスト応募1件を削除
+- `/radio` は `lib/radio.ts` の【要確認】7項目が埋まるまで本番では404（局への確認待ち）
 - Next.js（`app/` ルーター）+ Tailwind + shadcn/base-ui。Sentry 導入済み（`instrumentation*.ts`）
-- セキュリティ対応は Phase 1 が main に入っている（数式インジェクション・鍵の除外・レート制限）
-- テストは `schema` と `rate-limit` の2本
+- テストは `schema` `rate-limit` `radio-schema` `notify` の4本
 - **`node_modules` が無い状態で置かれていることがある。** その場合 `npm install` から
+- ビルドが `next/font/google queries have exactly one entry` で落ちることがある（Google Fonts の取得失敗）。もう一度流すと通る
