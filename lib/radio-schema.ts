@@ -7,7 +7,7 @@ export const radioApplicationSchema = z.object({
   bandName: z
     .string()
     .trim()
-    .min(1, "バンド名・アーティスト名を入力してください")
+    .min(1, "バンド名を入力してください")
     .max(200, "バンド名が長すぎます"),
   contactName: z
     .string()
