@@ -37,7 +37,7 @@ const overview: [string, string][] = [
   ["募集数", "1〜2組（1組あたり1名から出演できます。出演したい人数はフォームで教えてください）"],
   ["出演料・参加費", r.fee],
   ["交通費", r.travelCost],
-  ["放送回の公開", "放送した回は、後日 YouTube・note などで公開します"],
+  ["放送の配信・公開", "放送は YouTube でも生配信されます。放送した回は、後日 YouTube・note などでも公開します"],
   ["応募締切", r.deadline],
   ["結果のご連絡", r.resultNotice],
 ];

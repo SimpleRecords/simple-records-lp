@@ -187,7 +187,7 @@ export function RadioApplicationForm() {
           defaultChecked={values.consentArchive === "on"}
           error={errors.consentArchive?.[0]}
         >
-          出演した場合、放送回を後日 YouTube・note などで公開することに同意します
+          出演した場合、放送が YouTube で生配信されること、放送回を後日 YouTube・note などで公開することに同意します
         </Check>
         <Check
           name="consentLine"

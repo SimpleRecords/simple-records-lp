@@ -11,7 +11,7 @@ export const radioCampaign = {
   programName: "Elizabeth.eightミワユータの ロックンナイチンゲール",
   personality: "ミワユータ（ロックバンド Elizabeth.eight のボーカル）",
   schedule: "毎月第4水曜 14:00〜15:00・生放送",
-  listenOnline: "インターネットでは「リスラジ」で同時に聴けます",
+  listenOnline: "インターネットでは「リスラジ」やYouTubeの生配信で同時に聴けます",
 
   airDate: "2026年12月23日（水）14:00〜15:00・生放送",
   airDateShort: "12月23日（水）",
