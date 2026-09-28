@@ -14,6 +14,7 @@ const validInput = {
   members: "2名",
   canAttend: "on",
   consentArchive: "on",
+  consentLine: "on",
   consentArticle: "",
   message: "",
 };
@@ -35,9 +36,10 @@ describe("radioApplicationSchema", () => {
   });
 
   it("requires attendance and archive consent to be checked", () => {
-    const paths = pathsOf({ ...validInput, canAttend: "", consentArchive: "" });
+    const paths = pathsOf({ ...validInput, canAttend: "", consentArchive: "", consentLine: "" });
     expect(paths).toContain("canAttend");
     expect(paths).toContain("consentArchive");
+    expect(paths).toContain("consentLine");
   });
 
   it("treats article consent as optional", () => {

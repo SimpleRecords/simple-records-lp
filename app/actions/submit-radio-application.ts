@@ -21,6 +21,7 @@ const FIELDS = [
   "members",
   "canAttend",
   "consentArchive",
+  "consentLine",
   "consentArticle",
   "message",
 ] as const;

@@ -189,11 +189,19 @@ export function RadioApplicationForm() {
         >
           出演した場合、放送回を後日 YouTube・note などで公開することに同意します
         </Check>
+        <Check
+          name="consentLine"
+          required
+          defaultChecked={values.consentLine === "on"}
+          error={errors.consentLine?.[0]}
+        >
+          出演が決まった場合、放送前の打ち合わせのため、連絡先をパーソナリティに伝え、LINEでやりとりすることに同意します
+        </Check>
         <Check name="consentArticle" defaultChecked={values.consentArticle === "on"}>
           回答内容を、Simple Records が記事で紹介するバンドを探す際の参考にすることに同意します
         </Check>
         <p className="text-xs leading-relaxed text-neutral-500">
-          ご記入いただいた連絡先は、この募集と取材に関するご連絡にのみ使います。
+          ご記入いただいた連絡先は、この募集と取材に関するご連絡にのみ使います。出演が決まった方の連絡先は、放送前のやりとりのためにパーソナリティにもお伝えします。
         </p>
       </fieldset>
 
