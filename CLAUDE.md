@@ -115,7 +115,7 @@ DB が未設定・停止中でも、メールが送れれば応募は受け付�
 - 応募の保存先は Supabase。`/radio`（12/23放送のゲスト募集）と `/admin`（応募管理）がある
 - 2026-09-27 PR #2 マージ・本番反映。応募ボードの20件を `applications` に移行済み（`source='import'`）、テスト応募は削除済み。以後の台帳の正本はこの表（AI は `npm run apps`）
 - 本番でメールのリンクからのログインを確認済み（2026-09-27 オーナー）。`npm run apps` は PR #3 でマージ済み
-- `/radio` は `lib/radio.ts` に【要確認】が1つでも残ると本番で404になる。2026-09-27 に全項目を埋めた（PR #5）＝**マージすると公開される**
+- `/radio` は `lib/radio.ts` に【要確認】が1つでも残ると本番で404になる。2026-09-27 に全項目を埋めて本番公開（PR #5）
 - Next.js（`app/` ルーター）+ Tailwind + shadcn/base-ui。Sentry 導入済み（`instrumentation*.ts`）
 - セキュリティ対応は Phase 1 が main に入っている（鍵の除外・レート制限。数式インジェクション対策はスプレッドシート廃止で不要になった）
 - テストは `schema` `rate-limit` `radio-schema` `notify` の4本
