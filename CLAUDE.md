@@ -13,6 +13,7 @@ Simple Records（音楽メディア・個人事業）の**掲載応募LP**。バ
 - GitHubリポジトリ: `SimpleRecords/simple-records-lp` … **PUBLIC**
 - Googleアカウント: simple.records.2022@gmail.com
 - Vercelアカウント: simple.records.2022@gmail.com
+- Vercel の実行場所: 東京（`hnd1`）。`vercel.json` の `regions` で指定。データベースが東京なので揃えてある。外すと米国（`iad1`）で動き、`/admin` が遅くなる
 - Supabase: simple.records.2022@gmail.com／プロジェクト `bpmknpjmvftfbxstwdfw`（Tokyo）。キーは 1Password「Simple Records」保管庫の `project_url` `anon_key` `service_role_key`
 - 区分: Simple Records（個人事業）
 
